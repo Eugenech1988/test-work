@@ -1,0 +1,470 @@
+/*input-styles*/
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    background: black;
+    cursor: pointer;
+    margin-top: -10px;
+}
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    border: 1px solid #000000;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: black;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: black;
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: #3071a9;
+    border-radius: 1.3px;
+    border: 0.2px solid #010101;
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #2a6495;
+    border: 0.2px solid #010101;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #3071a9;
+}
+input[type=range]::-ms-fill-upper {
+    background: #3071a9;
+    border: 0.2px solid #010101;
+    border-radius: 2.6px;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #367ebd;
+}
+
+/*styles start*/
+
+body {
+    font-family: arial, sans-serif;
+    font-size: 18px;
+}
+
+#wrapper {
+    position: relative;
+}
+
+#vidget-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+#outer-container {
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: 1px solid black;
+    box-sizing: border-box;
+    background: #ffffff;
+    overflow: hidden;
+    transition: all .5s ease;
+}
+
+#outer-container.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#close-link {
+    cursor: pointer;
+    z-index: 999;
+    right: 20px;
+    top: 20px;
+    position: absolute;
+    color: black;
+    text-decoration: none;
+}
+
+#close-icon, #close-text {
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+
+#close-text {
+    padding-right: 17px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#close-icon {
+    position: absolute;
+    top: 0;
+    right: -5px;
+}
+
+#close-icon:after,
+#close-icon:before {
+    position: absolute;
+    content: '';
+    width: 15px;
+    height: 3px;
+    background-color: black;
+    right: 5px;
+    top: 9px;
+    
+}
+
+#close-icon:after {
+    transform: rotate(45deg);
+}
+
+#close-icon:before {
+    transform: rotate(-45deg);
+}
+
+#logo-main {
+    position: absolute;
+    top: 120px;
+    left: 25px;
+    width: 151px;
+    height: 28px;
+    background-image: url('img/T_SamsungLogo.png');
+    pointer-events: none;
+}
+
+#logo-secondary {
+    position: absolute;
+    right: 25px;
+    top: 123px;
+    width: 202px;
+    height: 34px;
+    background-image: url('img/T_GalaxyLogo.png');
+    pointer-events: none;
+}
+
+#buy-btn {
+    position: absolute;
+    display: block;
+    right: 28px;
+    top: 864px;
+    width: 133px;
+    height: 42px;
+    cursor: pointer;
+    background-image: url('img/T_CTA.png');
+}
+
+#phone-wrapper,
+#internals {
+    position: absolute;
+    top: 294px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    height: 221px;
+    width: 514px;
+    transform: scale(1.5);
+    visibility: visible;
+    transition: opacity .5s ease;
+    background-image: url('img/phone/phone_sprite.png');
+}
+
+#phone-wrapper.invisible {
+    opacity: 0;
+    visibility: hidden;
+}
+
+#internals {
+    background-image: url('img/phone/phone_internals.png');
+    opacity: 0;
+    visibility: hidden;
+}
+
+#internals.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#internals-frame {
+    position: absolute;
+    top: 138px;
+    left: 78px;
+    display: block;
+    width: 57px;
+    height: 45px;
+    z-index: 5;
+    background-image: url("img/internals_frame.png");
+}
+
+#internals-frame-highlight {
+    z-index: 1;
+    overflow: hidden;
+    position: absolute;
+    top: 140px;
+    left: 78px;
+    width: 54px;
+    height: 40px;
+}
+
+#internals-frame-highlight:before,
+#internals-frame-highlight:after {
+    opacity: 0;
+    content: '';
+    display: block;
+    width: 35px;
+    height: 70px;
+    position: absolute;
+    left: -20px;
+    top: -11px;
+    background-size: cover;
+    background-image: url("img/card_highlight.png");
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+#internals.visible #internals-frame-highlight:after {
+    left: -15px;
+    -webkit-animation: cardHighLight 1s linear .4s;
+    -o-animation: cardHighLight 1s linear .4s;
+    animation: cardHighLight 1s  linear .4s;
+}
+
+#internals.visible #internals-frame-highlight:before {
+    left: -60px;
+    -webkit-animation: cardHighLight 1s ease-in-out .6s;
+    -o-animation: cardHighLight 1s ease-in-out .6s;
+    animation: cardHighLight 1s  ease-in-out .6s;
+}
+
+#phone-video {
+    display: block;
+    position: absolute;
+    top: 9px;
+    left: 77px;
+}
+
+#phone-video.hidden {
+    display: none;
+}
+
+#range-wrapper {
+    position: absolute;
+    width: 300px;
+    height: 25px;
+    top: 598px;
+    left: 317px;
+}
+
+#range-notify {
+    position: absolute;
+    top: 593px;
+    left: 182px;
+    width: 110px;
+    height: 41px;
+    background-image: url("img/T_SliderText.png");
+}
+
+#text-wrapper {
+    position: absolute;
+    top: 691px;
+    left: 38px;
+    width: 674px;
+    height: 33px;
+    display: block;
+}
+
+.text {
+    transition: opacity .6s ease;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 674px;
+    height: 33px;
+}
+
+.text.active {
+    opacity: 1;
+}
+
+.text--1 {
+    background-image: url('img/T_Text1.png');
+}
+
+.text--2 {
+    background-image: url('img/T_Text2.png');
+}
+
+.text--3 {
+    background-image: url('img/T_Text3.png');
+}
+
+.text--4 {
+    background-image: url('img/T_Text4.png');
+}
+
+#flash-wrapp {
+    opacity: 0;
+    transition: opacity .2s ease;
+    transform: rotate(45deg);
+    position: absolute;
+    width: 299px;
+    height: 299px;
+    top: 200px;
+    left: 10px;
+    background-image: url(img/flash.png);
+    z-index: 50;
+}
+
+#flash-wrapp.active {
+    opacity: 1;
+    -webkit-animation: flashAnimate ease-out .29s;
+    -o-animation: flashAnimate ease-out .29s;
+    animation: flashAnimate ease-out .29s;
+}
+
+/*animations*/
+
+@keyframes cardHighLight {
+    0%   { opacity: 0; }
+    30%  { opacity: 1; }
+    100% { left: 70px; opacity: 0; }
+}
+
+@-webkit-keyframes cardHighLight {
+    0%   { opacity: 0; }
+    20%  { opacity: 1; }
+    100% { left: 70px; opacity: 0; }
+}
+
+@-webkit-keyframes flashAnimate {
+    0%   { opacity: 0; transform: scale(.01)}
+    20%  { opacity: 1; }
+    50%  { transform: rotate(-180deg)}
+    100% { transform: scale(1.8) rotate(200deg)}
+}
+
+@keyframes flashAnimate {
+    0%   { opacity: 0; transform: scale(.01)}
+    20%  { opacity: 1; }
+    50%  { transform: rotate(-180deg)}
+    100% { transform: scale(1.8) rotate(200deg)}
+}
+
+/*#rain_container {*/
+    /*position: absolute;*/
+    /*width: 970;*/
+    /*height: 250;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*z-index: 502;*/
+    /*pointer-events: none;*/
+/*}*/
+
+/*.rainDrop_1 {*/
+    /*position: absolute;*/
+    /*width: 30;*/
+    /*height: 28px;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*background-image: url(raindrop_1.png);*/
+    /*pointer-events: none;*/
+/*}*/
+
+/*.rainDrop_2 {*/
+    /*position: absolute;*/
+    /*width: 15px;*/
+    /*height: 23px;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*background-image: url(raindrop_2.png);*/
+    /*pointer-events: none;*/
+/*}*/
+
+/*.rainDrop_3 {*/
+    /*position: absolute;*/
+    /*width: 22px;*/
+    /*height: 19px;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*background-image: url(raindrop_3.png);*/
+    /*pointer-events: none;*/
+/*}*/
+
+/*.rainDrop_4 {*/
+    /*position: absolute;*/
+    /*width: 15px;*/
+    /*height: 24px;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*background-image: url(raindrop_4.png);*/
+    /*pointer-events: none;*/
+/*}*/

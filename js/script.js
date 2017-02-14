@@ -1,4 +1,21 @@
-window.onload = function () {
+window.onload = () => {
+
+    //declare variables
+
+    const Elements = {
+        phoneWrapper : document.getElementById('phone-wrapper'),
+        phoneVideo : document.getElementById('phone-video'),
+        rangeWrapp : document.getElementById('range-wrapper'),
+        rangeText : document.getElementById('range-notify'),
+        textWrapp : document.getElementById('text-wrapper'),
+        buttonWrapp : document.getElementById('buy-btn'),
+        loaderWrapp : document.getElementById('loader-wrapp'),
+        phoneVideoWrapper : document.getElementById('phone-video'),
+        inputRange : document.getElementById('range'),
+        phoneInternals : document.getElementById('internals'),
+        flashWrapp : document.getElementById('flash-wrapp'),
+        rainWrapp : document.getElementById('rain-wrapp')
+    };
 
     /**
      *
@@ -8,31 +25,31 @@ window.onload = function () {
 
     // function that changes phone's background and shows internals of phone
 
-    function changePhoneBackground(rangeValue) {
-                var phone = document.getElementById("phone-wrapper"),
-                    phoneInternals = document.getElementById('internals'),
-                    totalFrames = 59 , //set total frames
+    const changePhoneBackground = (rangeValue) => {
+                let totalFrames = 59 , //set total frames
                     frameHeight = 100/totalFrames; //receive height percentage
-                phone.style.backgroundPositionY = frameHeight*rangeValue + "%"; //get background position in percentage
+
+        Elements.phoneWrapper.style.backgroundPositionY = frameHeight*rangeValue + "%"; //get background position in percentage
+
         if (rangeValue == 59) {
-            phone.classList.add('invisible');
-            phoneInternals.classList.add('visible');
+            Elements.phoneWrapper.classList.add('invisible');
+            Elements.phoneInternals.classList.add('visible');
         } else {
-            phone.classList.remove('invisible');
-            phoneInternals.classList.remove('visible');
+            Elements.phoneWrapper.classList.remove('invisible');
+            Elements.phoneInternals.classList.remove('visible');
         }
-    }
+    };
 
     // function that changes text
 
-    function textChange(rangeValue) {
-        var textArray = document.querySelectorAll(".text");
-        function toggleActiveText(position) {
-        for (var i = 0; i < textArray.length; i++) {
-        textArray[i].classList.remove('active');
+    const textChange = (rangeValue) => {
+        let textArray = document.querySelectorAll(".text");
+        const toggleActiveText = (position) => {
+        for (let i = 0; i < textArray.length; i++) {
+            textArray[i].classList.remove('active');
         }
-        textArray[position].classList.add('active');
-        }
+            textArray[position].classList.add('active');
+        };
         if (rangeValue == 0 && rangeValue < 15) {
             toggleActiveText(0);
         } else if (rangeValue > 14 && rangeValue < 29) {
@@ -42,57 +59,53 @@ window.onload = function () {
         } else if (rangeValue > 43) {
             toggleActiveText(3);
         }
-    }
+    };
 
     //function that hides and shows video
 
-    function hideVideo(rangeValue) {
-        var phoneVideoWrapper = document.getElementById('phone-video');
+    const hideVideo = (rangeValue) => {
         if (rangeValue > 1) {
-            phoneVideoWrapper.classList.add('hidden');
-            phoneVideoWrapper.pause();
+            Elements.phoneVideoWrapper.classList.add('hidden');
+            Elements.phoneVideoWrapper.pause();
         } else {
-            phoneVideoWrapper.classList.remove('hidden');
-            phoneVideoWrapper.play();
+            Elements.phoneVideoWrapper.classList.remove('hidden');
+            Elements.phoneVideoWrapper.play();
         }
-    }
+    };
 
 
     //function that shows flash
 
-    function showFlash(rangeValue) {
-        var flash = document.getElementById('flash-wrapp');
+    const showFlash = (rangeValue) => {
         if (rangeValue == 29) {
-            flash.classList.add('active');
-            setTimeout(function () {
-            flash.classList.remove('active');
+            Elements.flashWrapp.classList.add('active');
+            setTimeout(() => {
+            Elements.flashWrapp.classList.remove('active');
             }, 300)
         }
-    }
+    };
 
     //rain drops init
 
-    function Rains() {
-        this.isRaining = false;
-        this.rainDrops = [];
-        this.rainWrapp = document.getElementById('rain-wrapp');
-    }
+    class Rains {
+        constructor() {
+            this.isRaining = false;
+            this.rainDrops = [];
+            this.rainWrapp = Elements.rainWrapp;
+        }
+        createRains() {
 
-    Rains.prototype = {
-        constructor: Rains,
-        createRains: function() {
-
-            for ( var i = 1; i < randomNumber( 40, 100 ); i++ ) {
-                var dropNumber = randomNumber(1, 4),
+            for ( let i = 1; i < randomNumber( 40, 100 ); i++ ) {
+                let dropNumber = randomNumber(1, 4),
                     newClass = 'rain-drop' + dropNumber;
 
-                var newRainDrop = document.createElement('div');
+                let newRainDrop = document.createElement('div');
 
                 newRainDrop.className = newClass;
                 newRainDrop.classList.add('active');
 
-                var leftPos = randomNumber(0, 689);
-                var topPos = randomNumber(0, 320);
+                let leftPos = randomNumber(0, 689);
+                let topPos = randomNumber(0, 320);
 
                 newRainDrop.style.left = leftPos + 'px';
                 newRainDrop.style.top = topPos + 'px';
@@ -100,9 +113,9 @@ window.onload = function () {
                 this.rainDrops.push(newRainDrop);
 
             }
-        },
+        }
 
-        renderRains: function() {
+        renderRains() {
             if (this.isRaining) {
                 return;
             }
@@ -132,20 +145,20 @@ window.onload = function () {
                 this.isRaining = false;
             });
         }
-    };
+    }
 
-    var rains = new Rains();
+
+    let rains = new Rains();
 
     //function that shows rain raindrops
 
     function rainDropsShow(rangeValue) {
-        var rainWrapp = document.getElementById('rain-wrapp');
 
         if (rangeValue > 10 && rangeValue < 29) {
             rains.renderRains();
-            rainWrapp.classList.add('visible');
+            Elements.rainWrapp.classList.add('visible');
         } else {
-            rainWrapp.classList.remove('visible');
+            Elements.rainWrapp.classList.remove('visible');
         }
 
     }
@@ -153,56 +166,45 @@ window.onload = function () {
     //function that close widget on click
 
     function closeWidget() {
-        var closeWidgetIcon = document.getElementById('close-link'),
-            widgetWrapper = document.getElementById('outer-container'),
-            phoneVideoWrapper = document.getElementById('phone-video');
+        let closeWidgetIcon = document.getElementById('close-link'),
+            widgetWrapper = document.getElementById('outer-container');
         closeWidgetIcon.addEventListener('click', function() {
             widgetWrapper.classList.add('hidden');
-                phoneVideoWrapper.classList.add('hidden');
-                phoneVideoWrapper.pause();
+                Elements.phoneVideoWrapper.classList.add('hidden');
+                Elements.phoneVideoWrapper.pause();
         }, false);
     }
 
     //randomise numbers function
 
     function randomNumber(min,max) {
-        var randomNumber = Math.floor(Math.random()*(max-min+1)+min);
+        let randomNumber = Math.floor(Math.random()*(max-min+1)+min);
         return randomNumber;
     }
 
-    function preLoad() {
-        var phoneWrapper = document.getElementById('phone-wrapper'),
-            phoneVideo = document.getElementById('phone-video'),
-            rangeWrapp = document.getElementById('range-wrapper'),
-            rangeText = document.getElementById('range-notify'),
-            textWrapp = document.getElementById('text-wrapper'),
-            buttonWrapp = document.getElementById('buy-btn'),
-            loaderWrapp = document.getElementById('loader-wrapp'),
-            phoneVideoWrapper = document.getElementById('phone-video');
+    const preLoad = () => {
 
-            phoneVideoWrapper.pause();
+            Elements.phoneVideoWrapper.pause();
 
-        setTimeout(function () {
-            phoneVideoWrapper.play();
-            phoneWrapper.classList.remove('hidden');
-            phoneVideo.classList.remove('hidden');
-            rangeWrapp.classList.remove('hidden');
-            rangeText.classList.remove('hidden');
-            textWrapp.classList.remove('hidden');
-            buttonWrapp.classList.remove('hidden');
-            loaderWrapp.style.display = 'none';
+        setTimeout(() => {
+            Elements.phoneVideoWrapper.play();
+            Elements.phoneWrapper.classList.remove('hidden');
+            Elements.phoneVideo.classList.remove('hidden');
+            Elements.rangeWrapp.classList.remove('hidden');
+            Elements.rangeText.classList.remove('hidden');
+            Elements.textWrapp.classList.remove('hidden');
+            Elements.buttonWrapp.classList.remove('hidden');
+            Elements.loaderWrapp.style.display = 'none';
         }, 2000)
-    }
-
-    var res = document.getElementById("range"); //input range variable
+    };
 
     // initialize functions
 
     closeWidget();
     preLoad();
 
-    res.addEventListener('input', function (e) {
-        var rangeValue = e.target.value;
+    Elements.inputRange.addEventListener('input', function (e) {
+        let rangeValue = e.target.value;
         changePhoneBackground(rangeValue);
         textChange(rangeValue);
         hideVideo(rangeValue);

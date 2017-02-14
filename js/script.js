@@ -120,9 +120,12 @@ window.onload = function () {
 
     function closeWidget() {
         var closeWidgetIcon = document.getElementById('close-link'),
-            widgetWrapper = document.getElementById('outer-container');
+            widgetWrapper = document.getElementById('outer-container'),
+            phoneVideoWrapper = document.getElementById('phone-video');
         closeWidgetIcon.addEventListener('click', function() {
             widgetWrapper.classList.add('hidden');
+                phoneVideoWrapper.classList.add('hidden');
+                phoneVideoWrapper.pause();
         }, false);
     }
 

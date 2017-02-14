@@ -1,20 +1,5 @@
 window.onload = function () {
 
-    var res = document.getElementById("range"); //input range variable
-
-    // initialize functions
-
-    closeWidget();
-
-    res.addEventListener('input', function (e) {
-        var rangeValue = e.target.value;
-        changePhoneBackground(rangeValue);
-        textChange(rangeValue);
-        hideVideo(rangeValue);
-        showFlash(rangeValue);
-        rainDrops(rangeValue);
-    }, false);
-
     /**
      *
      * @param rangeValue - Input range value
@@ -85,36 +70,44 @@ window.onload = function () {
         }
     }
 
-    //function that shows raindrops
+    //function that shows rain raindrops
 
-    function rainDrops(rangeValue) {
+    function rainDropsShow(rangeValue) {
 
+        if (rangeValue > 10 && rangeValue < 29) {
+            rainStart();
+        }
+        
+    }
+
+    //function that randomise rain drops
+
+    function rainStart() {
+        var rainDrops = [];
         var newRainDrop = document.createElement('div'),
             dropNumber = randomNumber(1, 4),
             newClass = 'rain-drop' + dropNumber,
             rainWrapp = document.getElementById('rain-wrapp');
 
-        if (rangeValue > 10 && rangeValue < 29) {
-            rainWrapp.classList.add("visible");
+        rainDrops.push(newRainDrop);
 
-            newRainDrop.className = newClass;
-            newRainDrop.classList.add('active');
-            rainWrapp.appendChild(newRainDrop);
+        newRainDrop.className = newClass;
+        newRainDrop.classList.add('active');
 
-            var leftPos = randomNumber(0, 689);
-            var topPos = randomNumber(0, 320);
+        rainWrapp.appendChild(newRainDrop);
 
-            newRainDrop.style.left = leftPos + 'px';
-            newRainDrop.style.top = topPos + 'px';
-            setTimeout(function () {
-                rainWrapp.removeChild(newRainDrop)
-            }, 1000)
-        } else {
-            rainWrapp.classList.remove('visible');
-        }
+        var leftPos = randomNumber(0, 689);
+        var topPos = randomNumber(0, 320);
+
+        newRainDrop.style.left = leftPos + 'px';
+        newRainDrop.style.top = topPos + 'px';
+
+        setTimeout(function () {
+            rainWrapp.removeChild(newRainDrop)
+        }, 1000)
     }
 
-    // close click function
+    //function that close widget on click
 
     function closeWidget() {
         var closeWidgetIcon = document.getElementById('close-link'),
@@ -133,6 +126,22 @@ window.onload = function () {
         var randomNumber = Math.floor(Math.random()*(max-min+1)+min);
         return randomNumber;
     }
-    
+
+
+    var res = document.getElementById("range"); //input range variable
+
+    // initialize functions
+
+    closeWidget();
+
+    res.addEventListener('input', function (e) {
+        var rangeValue = e.target.value;
+        changePhoneBackground(rangeValue);
+        textChange(rangeValue);
+        hideVideo(rangeValue);
+        showFlash(rangeValue);
+        rainDropsShow(rangeValue);
+    }, false);
+
 };
 

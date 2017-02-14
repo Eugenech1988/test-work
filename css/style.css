@@ -347,17 +347,12 @@ body {
 }
 
 #rain-wrapp {
-    display: none;
     width: 699px;
     height: 330px;
     position: absolute;
     top: 240px;
     left: 35px;
     z-index: 500;
-}
-
-#rain-wrapp.visible {
-    display: block;
 }
 
 /*input-styles*/

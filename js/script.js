@@ -89,7 +89,7 @@ window.onload = function () {
 
     function rainDrops(rangeValue) {
 
-        var rainDrops = [];
+        // var rainDrops = [];
         var newRainDrop = document.createElement('div'),
             dropNumber = randomNumber(1, 4),
             newClass = 'rain-drop' + dropNumber,
@@ -108,8 +108,10 @@ window.onload = function () {
 
             newRainDrop.style.left = leftPos + 'px';
             newRainDrop.style.top = topPos + 'px';
-
-        } else if (rangeValue < 10 && rangeValue > 29) {
+            setTimeout(function () {
+                rainWrapp.removeChild(newRainDrop)
+            }, 1000)
+        } else {
             rainWrapp.classList.remove('visible');
         }
     }

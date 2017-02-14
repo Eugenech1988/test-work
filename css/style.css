@@ -444,7 +444,7 @@ body {
 }
 
 #rain-wrapp {
-    visibility: hidden;
+    display: none;
     width: 699px;
     height: 330px;
     position: absolute;
@@ -454,7 +454,7 @@ body {
 }
 
 #rain-wrapp.visible {
-    visibility: visible;
+    display: block;
 }
 
 /*animations*/

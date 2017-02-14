@@ -386,8 +386,19 @@ body {
 .rain-drop2,
 .rain-drop3,
 .rain-drop4 {
+    visibility: hidden;
     position: absolute;
     pointer-events: none;
+}
+
+.rain-drop1.active,
+.rain-drop2.active,
+.rain-drop3.active,
+.rain-drop4.active {
+    visibility: visible;
+    -webkit-animation: rainDropAnimate ease-out 1s;
+    -o-animation: rainDropAnimate ease-out 1s;
+    animation: rainDropAnimate ease-out 1s;
 }
 
 .rain-drop1 {
@@ -432,16 +443,6 @@ body {
     z-index: 500;
 }
 
-/*#canvas.visible {*/
-    /*visibility: visible;*/
-/*}*/
-
-/*#canvas.visible + #rain-wrapp .rain-drop1 {*/
-    /*-webkit-animation: rainAnimate ease-out 1s;*/
-    /*-o-animation: rainAnimate ease-out 1s;*/
-    /*animation: rainAnimate ease-out 1s;*/
-/*}*/
-
 #rain-wrapp {
     visibility: hidden;
     width: 699px;
@@ -484,3 +485,14 @@ body {
     100% { transform: scale(1.8) rotate(200deg)}
 }
 
+@-webkit-keyframes flashAnimate {
+    0%   { opacity: 1; transform: scale(5) }
+    20%  { transform: scale(1) }
+    100% { top:100%; opacity: 0 }
+}
+
+@keyframes rainDropAnimate {
+    0%   { opacity: 1; transform: scale(5) }
+    20%  { transform: scale(1) }
+    100% { top:100%; opacity: 0 }
+}

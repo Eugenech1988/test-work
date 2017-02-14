@@ -89,18 +89,18 @@ window.onload = function () {
 
     function rainDrops(rangeValue) {
 
-        var rainDrops = [],
-            newRainDrop = document.createElement('div'),
+        var rainDrops = [];
+        var newRainDrop = document.createElement('div'),
             dropNumber = randomNumber(1, 4),
             newClass = 'rain-drop' + dropNumber,
             rainWrapp = document.getElementById('rain-wrapp');
 
         if (rangeValue > 10 && rangeValue < 29) {
             rainWrapp.classList.add("visible");
-
             rainDrops.push(newRainDrop);
 
             newRainDrop.className = newClass;
+            newRainDrop.classList.add('active');
             rainWrapp.appendChild(newRainDrop);
 
             var leftPos = randomNumber(0, 689);
@@ -109,7 +109,7 @@ window.onload = function () {
             newRainDrop.style.left = leftPos + 'px';
             newRainDrop.style.top = topPos + 'px';
 
-        } else {
+        } else if (rangeValue < 10 && rangeValue > 29) {
             rainWrapp.classList.remove('visible');
         }
     }

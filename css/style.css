@@ -346,9 +346,9 @@ body {
 .rain-drop3.active,
 .rain-drop4.active {
     visibility: visible;
-    -webkit-animation: rainDropAnimate ease-out 1s;
-    -o-animation: rainDropAnimate ease-out 1s;
-    animation: rainDropAnimate ease-out 1s;
+    -webkit-animation: rainDropAnimate ease-out 2s;
+    -o-animation: rainDropAnimate ease-out 2s;
+    animation: rainDropAnimate ease-out 2s;
 }
 
 .rain-drop1 {
@@ -525,7 +525,7 @@ input[type=range]::-ms-track {
 
 @keyframes rainDropAnimate {
     0%   { opacity: 1; transform: scale(5) }
-    20%  { transform: scale(1) }
+    20%  { transform: scale(0.8) }
     100% { top:100%; opacity: 0 }
 }
 

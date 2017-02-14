@@ -95,7 +95,7 @@ window.onload = () => {
         }
         createRains() {
 
-            for ( let i = 1; i < randomNumber( 40, 100 ); i++ ) {
+            for ( let i = 1; i < randomNumber( 80, 120 ); i++ ) {
                 let dropNumber = randomNumber(1, 4),
                     newClass = 'rain-drop' + dropNumber;
 
@@ -135,7 +135,7 @@ window.onload = () => {
                         setTimeout(() => {
                             this.rainWrapp.removeChild(item);
                             resolve();
-                        }, 1000)
+                        }, 2000)
                     });
                 });
             });
@@ -177,10 +177,12 @@ window.onload = () => {
 
     //randomise numbers function
 
-    function randomNumber(min,max) {
+    const randomNumber = (min,max) => {
         let randomNumber = Math.floor(Math.random()*(max-min+1)+min);
         return randomNumber;
-    }
+    };
+
+    //preload function
 
     const preLoad = () => {
 

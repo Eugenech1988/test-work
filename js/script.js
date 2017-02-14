@@ -89,7 +89,6 @@ window.onload = function () {
 
     function rainDrops(rangeValue) {
 
-        var rainDrops = [];
         var newRainDrop = document.createElement('div'),
             dropNumber = randomNumber(1, 4),
             newClass = 'rain-drop' + dropNumber,
@@ -97,7 +96,6 @@ window.onload = function () {
 
         if (rangeValue > 10 && rangeValue < 29) {
             rainWrapp.classList.add("visible");
-            rainDrops.push(newRainDrop);
 
             newRainDrop.className = newClass;
             newRainDrop.classList.add('active');

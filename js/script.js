@@ -70,42 +70,120 @@ window.onload = function () {
         }
     }
 
+    //function that randomise rain drops
+
+    function Rains() {
+        this.isRaining = false;
+        this.rainDrops = [];
+        this.rainWrapp = document.getElementById('rain-wrapp');
+    }
+
+    Rains.prototype = {
+        constructor: Rains,
+        createRains: function() {
+
+            for ( var i = 1; i < randomNumber( 40, 60 ); i++ ) {
+                var dropNumber = randomNumber(1, 4),
+                    newClass = 'rain-drop' + dropNumber;
+
+                var newRainDrop = document.createElement('div');
+
+                newRainDrop.className = newClass;
+                newRainDrop.classList.add('active');
+
+                var leftPos = randomNumber(0, 689);
+                var topPos = randomNumber(0, 320);
+
+                newRainDrop.style.left = leftPos + 'px';
+                newRainDrop.style.top = topPos + 'px';
+
+                this.rainDrops.push(newRainDrop);
+
+            }
+        },
+
+        renderRains: function() {
+            if (this.isRaining) {
+                return;
+            }
+
+            this.isRaining = true;
+
+            this.createRains();
+
+            this.rainDrops = this.rainDrops.map((item, index) => {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        this.rainWrapp.appendChild(item);
+                        resolve();
+                    }, randomNumber(100, 200) * index);
+                }).then(() => {
+                    return new Promise(resolve => {
+                        setTimeout(() => {
+                            this.rainWrapp.removeChild(item);
+                            resolve();
+                        }, 1000)
+                    });
+                });
+            });
+
+            Promise.all(this.rainDrops).then(() => {
+                this.rainDrops = [];
+                this.isRaining = false;
+            });
+
+
+        }
+    };
+
+    var rains = new Rains();
+
+
     //function that shows rain raindrops
 
     function rainDropsShow(rangeValue) {
+        var rainWrapp = document.getElementById('rain-wrapp');
 
         if (rangeValue > 10 && rangeValue < 29) {
-            rainStart();
+            rains.renderRains();
+            rainWrapp.classList.add('visible');
+        } else {
+            rainWrapp.classList.remove('visible');
         }
-        
+
     }
 
-    //function that randomise rain drops
+    // function rainStart() {
+    //     setTimeout(function () {
+    //         var dropNumber = randomNumber(1, 4),
+    //             newClass = 'rain-drop' + dropNumber,
+    //             rainWrapp = document.getElementById('rain-wrapp');
+    //
+    //         for ( var i = 1; i < randomNumber( 40, 60 ); i++ ) {
+    //             var newRainDrop = document.createElement('div'),
+    //                 rainDrops = [];
+    //
+    //             newRainDrop.className = newClass;
+    //             newRainDrop.classList.add('active');
+    //
+    //             rainDrops.push(newRainDrop);
+    //
+    //             var leftPos = randomNumber(0, 689);
+    //             var topPos = randomNumber(0, 320);
+    //
+    //             newRainDrop.style.left = leftPos + 'px';
+    //             newRainDrop.style.top = topPos + 'px';
+    //
+    //             rainWrapp.appendChild(newRainDrop);
+    //
+    //             setTimeout(function () {
+    //                 rainWrapp.removeChild(newRainDrop);
+    //             }, 1000)
+    //         }
+    //     }, randomNumber( 100, 600));
+    // }
 
-    function rainStart() {
-        var rainDrops = [];
-        var newRainDrop = document.createElement('div'),
-            dropNumber = randomNumber(1, 4),
-            newClass = 'rain-drop' + dropNumber,
-            rainWrapp = document.getElementById('rain-wrapp');
 
-        rainDrops.push(newRainDrop);
-
-        newRainDrop.className = newClass;
-        newRainDrop.classList.add('active');
-
-        rainWrapp.appendChild(newRainDrop);
-
-        var leftPos = randomNumber(0, 689);
-        var topPos = randomNumber(0, 320);
-
-        newRainDrop.style.left = leftPos + 'px';
-        newRainDrop.style.top = topPos + 'px';
-
-        setTimeout(function () {
-            rainWrapp.removeChild(newRainDrop)
-        }, 1000)
-    }
 
     //function that close widget on click
 

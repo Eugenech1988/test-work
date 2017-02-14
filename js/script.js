@@ -89,7 +89,7 @@ window.onload = function () {
 
     function rainDrops(rangeValue) {
 
-        // var rainDrops = [];
+        var rainDrops = [];
         var newRainDrop = document.createElement('div'),
             dropNumber = randomNumber(1, 4),
             newClass = 'rain-drop' + dropNumber,

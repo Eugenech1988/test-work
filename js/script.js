@@ -1,11 +1,10 @@
 window.onload = function () {
-    
+
     var res = document.getElementById("range"); //input range variable
 
     // initialize functions
 
-    videoInit();
-    closeWgit idget();
+    closeWidget();
 
     res.addEventListener('input', function (e) {
         var rangeValue = e.target.value;
@@ -14,7 +13,7 @@ window.onload = function () {
         hideVideo(rangeValue);
         showFlash(rangeValue);
         rainDrops(rangeValue);
-    });
+    }, false);
 
     /**
      *
@@ -25,8 +24,8 @@ window.onload = function () {
     // function that changes phone's background and shows internals of phone
 
     function changePhoneBackground(rangeValue) {
-                var phone = document.getElementById("phone-wrapper"), //wrapper of phone
-                    phoneInternals = document.getElementById('internals'), //internals of phone wrapper
+                var phone = document.getElementById("phone-wrapper"),
+                    phoneInternals = document.getElementById('internals'),
                     totalFrames = 59 , //set total frames
                     frameHeight = 100/totalFrames; //receive height percentage
                 phone.style.backgroundPositionY = frameHeight*rangeValue + "%"; //get background position in percentage
@@ -42,9 +41,9 @@ window.onload = function () {
     // function that changes text
 
     function textChange(rangeValue) {
-        var textArray = document.querySelectorAll(".text"); //create array with elements width class 'text'
+        var textArray = document.querySelectorAll(".text");
         function toggleActiveText(position) {
-        for (var i = 0; i < textArray.length; i += 1) {
+        for (var i = 0; i < textArray.length; i++) {
         textArray[i].classList.remove('active');
         }
         textArray[position].classList.add('active');
@@ -66,8 +65,10 @@ window.onload = function () {
         var phoneVideoWrapper = document.getElementById('phone-video');
         if (rangeValue > 1) {
             phoneVideoWrapper.classList.add('hidden');
+            phoneVideoWrapper.pause();
         } else {
             phoneVideoWrapper.classList.remove('hidden');
+            phoneVideoWrapper.play();
         }
     }
 
@@ -87,46 +88,48 @@ window.onload = function () {
     //function that shows raindrops
 
     function rainDrops(rangeValue) {
-        if (rangeValue > 10 && rangeValue < 27) {
-        console.log(1);
+
+        var rainDrops = [],
+            newRainDrop = document.createElement('div'),
+            dropNumber = randomNumber(1, 4),
+            newClass = 'rain-drop' + dropNumber,
+            rainWrapp = document.getElementById('rain-wrapp');
+
+        if (rangeValue > 10 && rangeValue < 29) {
+            rainWrapp.classList.add("visible");
+
+            rainDrops.push(newRainDrop);
+
+            newRainDrop.className = newClass;
+            rainWrapp.appendChild(newRainDrop);
+
+            var leftPos = randomNumber(0, 689);
+            var topPos = randomNumber(0, 320);
+
+            newRainDrop.style.left = leftPos + 'px';
+            newRainDrop.style.top = topPos + 'px';
+
+        } else {
+            rainWrapp.classList.remove('visible');
         }
     }
 
     // close click function
 
     function closeWidget() {
-        var closeWidgetIcon = document.getElementById('close-link'), //close-link-wrapper
-            widgetWrapper = document.getElementById('outer-container'); //widget-container
+        var closeWidgetIcon = document.getElementById('close-link'),
+            widgetWrapper = document.getElementById('outer-container');
         closeWidgetIcon.addEventListener('click', function() {
             widgetWrapper.classList.add('hidden');
         }, false);
     }
 
-    //function that shows embedded video
+    //randomise numbers function
 
-    function videoInit() {
-        var player;
-            // phoneVideoWrapp = document.getElementById('phone-video');
-        player = new YT.Player('phone-video', {  //declare player in the block with id phone-video
-            videoId: '9xKR8Vcjias',
-            width: 363,
-            height: 203,
-            playerVars: {
-                autoplay: 1,
-                controls: 1,
-                showinfo: 0,
-                modestbranding: 1,
-                loop: 1,
-                fs: 0,
-                cc_load_policy: 0,
-                iv_load_policy: 3,
-                autohide: 0
-            },
-            events: {
-                onReady: function (e) {
-                    e.target.mute();
-                }
-            }
-        });
+    function randomNumber(min,max) {
+        var randomNumber = Math.floor(Math.random()*(max-min+1)+min);
+        return randomNumber;
     }
+    
 };
+

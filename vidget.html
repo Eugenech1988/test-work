@@ -3,7 +3,7 @@
  <head>
      <meta charset="UTF-8">
      <title>Document</title>
-     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="css/style.css">
  </head>
  <body>
    <div id="outer-container">
@@ -14,7 +14,9 @@
         <div id="logo-main"></div>
         <div id="logo-secondary"></div>
        <div id="phone-wrapper">
-           <div id="phone-video"></div>
+           <video id="phone-video" autoplay="autoplay" loop="loop">
+               <source src="video/video.mp4">
+           </video>
        </div>
        <div id="flash-wrapp"></div>
        <div id="internals">
@@ -26,7 +28,10 @@
        <div id="range-wrapper">
            <input type="range" min="0" max="59" value="0" id="range">
        </div>
-        <div id="text-wrapper">
+       <div id="rain-wrapp">
+
+       </div>
+       <div id="text-wrapper">
             <div class="text text--1 active"></div>
             <div class="text text--2"></div>
             <div class="text text--3"></div>
@@ -35,6 +40,6 @@
         <a href="javascript:;" id="buy-btn"></a>
    </div>
    <script src="https://www.youtube.com/iframe_api"></script>
-   <script src="script.js"></script>
+   <script src="js/script.js"></script>
  </body>
  </html>   

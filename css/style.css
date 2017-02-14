@@ -108,11 +108,20 @@ body {
     display: block;
     right: 28px;
     top: 864px;
-    transition:opacity .3s ease;
+    opacity: 1;
+    transition: all .8s ease;
     width: 133px;
     height: 42px;
     cursor: pointer;
+    visibility: visible;
+    transform: translateY(0);
     background-image: url('../img/T_CTA.png');
+}
+
+#buy-btn.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(100px);
 }
 
 #buy-btn:hover {
@@ -128,10 +137,17 @@ body {
     margin: 0 auto;
     height: 221px;
     width: 514px;
-    transform: scale(1.5);
+    transform: scale(1.5) translateY(0);
+    opacity: 1;
     visibility: visible;
-    transition: opacity .5s ease;
+    transition: opacity .5s ease, transform .5s ease;
     background-image: url('../img/phone/phone_sprite.png');
+}
+
+#phone-wrapper.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(100px);
 }
 
 #phone-wrapper.invisible {
@@ -218,29 +234,50 @@ body {
 }
 
 #range-wrapper {
+    opacity: 1;
     position: absolute;
     width: 300px;
     height: 25px;
     top: 598px;
     left: 317px;
+    visibility: visible;
+    transition: all .5s ease;
+    transform: translateY(0);
 }
 
 #range-notify {
+    opacity: 1;
     position: absolute;
     top: 593px;
     left: 182px;
     width: 110px;
     height: 41px;
     background-image: url("../img/T_SliderText.png");
+    visibility: visible;
+    transition: all .5s ease;
+    transform: translateY(0);
 }
 
 #text-wrapper {
+    opacity: 1;
     position: absolute;
     top: 691px;
     left: 38px;
     width: 674px;
     height: 33px;
     display: block;
+    visibility: visible;
+    transition: all .5s ease;
+    transform: translateY(0);
+}
+
+#text-wrapper.hidden,
+#range-notify.hidden,
+#range-wrapper.hidden {
+    transform: translateY(100px);
+    transition: all .5s ease;
+    visibility: hidden;
+    opacity: 0;
 }
 
 .text {
@@ -358,6 +395,18 @@ body {
 
 #rain-wrapp.visible {
     display: block;
+}
+
+#loader-wrapp {
+    color: #C1C2C2;
+    font-size: 30px;
+    position: absolute;
+    top: 389px;
+    text-align: center;
+    left: 250px;
+    -webkit-animation: textBlur ease-out 1s infinite;
+    -o-animation: textBlur ease-out 1s infinite;
+    animation: textBlur ease-out 1s infinite;
 }
 
 /*input-styles*/
@@ -478,4 +527,15 @@ input[type=range]::-ms-track {
     0%   { opacity: 1; transform: scale(5) }
     20%  { transform: scale(1) }
     100% { top:100%; opacity: 0 }
+}
+
+@-webkit-keyframes textBlur {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes textBlur {
+    0%   { opacity: 0; }
+    50%  { opacity: 1; }
+    100% { opacity: 0; }
 }

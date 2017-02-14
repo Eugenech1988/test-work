@@ -82,7 +82,7 @@ window.onload = function () {
         constructor: Rains,
         createRains: function() {
 
-            for ( var i = 1; i < randomNumber( 40, 80 ); i++ ) {
+            for ( var i = 1; i < randomNumber( 40, 100 ); i++ ) {
                 var dropNumber = randomNumber(1, 4),
                     newClass = 'rain-drop' + dropNumber;
 
@@ -116,7 +116,7 @@ window.onload = function () {
                     setTimeout(() => {
                         this.rainWrapp.appendChild(item);
                         resolve();
-                    }, randomNumber(100, 300) * index);
+                    }, randomNumber(50, 200) * index);
                 }).then(() => {
                     return new Promise(resolve => {
                         setTimeout(() => {
@@ -170,12 +170,36 @@ window.onload = function () {
         return randomNumber;
     }
 
+    function preLoad() {
+        var phoneWrapper = document.getElementById('phone-wrapper'),
+            phoneVideo = document.getElementById('phone-video'),
+            rangeWrapp = document.getElementById('range-wrapper'),
+            rangeText = document.getElementById('range-notify'),
+            textWrapp = document.getElementById('text-wrapper'),
+            buttonWrapp = document.getElementById('buy-btn'),
+            loaderWrapp = document.getElementById('loader-wrapp'),
+            phoneVideoWrapper = document.getElementById('phone-video');
+
+            phoneVideoWrapper.pause();
+
+        setTimeout(function () {
+            phoneVideoWrapper.play();
+            phoneWrapper.classList.remove('hidden');
+            phoneVideo.classList.remove('hidden');
+            rangeWrapp.classList.remove('hidden');
+            rangeText.classList.remove('hidden');
+            textWrapp.classList.remove('hidden');
+            buttonWrapp.classList.remove('hidden');
+            loaderWrapp.style.display = 'none';
+        }, 2000)
+    }
 
     var res = document.getElementById("range"); //input range variable
 
     // initialize functions
 
     closeWidget();
+    preLoad();
 
     res.addEventListener('input', function (e) {
         var rangeValue = e.target.value;

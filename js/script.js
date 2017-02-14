@@ -70,7 +70,7 @@ window.onload = function () {
         }
     }
 
-    //function that randomise rain drops
+    //rain drops init
 
     function Rains() {
         this.isRaining = false;
@@ -82,7 +82,7 @@ window.onload = function () {
         constructor: Rains,
         createRains: function() {
 
-            for ( var i = 1; i < randomNumber( 40, 60 ); i++ ) {
+            for ( var i = 1; i < randomNumber( 40, 80 ); i++ ) {
                 var dropNumber = randomNumber(1, 4),
                     newClass = 'rain-drop' + dropNumber;
 
@@ -116,7 +116,7 @@ window.onload = function () {
                     setTimeout(() => {
                         this.rainWrapp.appendChild(item);
                         resolve();
-                    }, randomNumber(100, 200) * index);
+                    }, randomNumber(100, 300) * index);
                 }).then(() => {
                     return new Promise(resolve => {
                         setTimeout(() => {
@@ -131,13 +131,10 @@ window.onload = function () {
                 this.rainDrops = [];
                 this.isRaining = false;
             });
-
-
         }
     };
 
     var rains = new Rains();
-
 
     //function that shows rain raindrops
 
@@ -152,38 +149,6 @@ window.onload = function () {
         }
 
     }
-
-    // function rainStart() {
-    //     setTimeout(function () {
-    //         var dropNumber = randomNumber(1, 4),
-    //             newClass = 'rain-drop' + dropNumber,
-    //             rainWrapp = document.getElementById('rain-wrapp');
-    //
-    //         for ( var i = 1; i < randomNumber( 40, 60 ); i++ ) {
-    //             var newRainDrop = document.createElement('div'),
-    //                 rainDrops = [];
-    //
-    //             newRainDrop.className = newClass;
-    //             newRainDrop.classList.add('active');
-    //
-    //             rainDrops.push(newRainDrop);
-    //
-    //             var leftPos = randomNumber(0, 689);
-    //             var topPos = randomNumber(0, 320);
-    //
-    //             newRainDrop.style.left = leftPos + 'px';
-    //             newRainDrop.style.top = topPos + 'px';
-    //
-    //             rainWrapp.appendChild(newRainDrop);
-    //
-    //             setTimeout(function () {
-    //                 rainWrapp.removeChild(newRainDrop);
-    //             }, 1000)
-    //         }
-    //     }, randomNumber( 100, 600));
-    // }
-
-
 
     //function that close widget on click
 

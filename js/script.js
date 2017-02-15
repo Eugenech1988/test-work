@@ -14,7 +14,8 @@ window.onload = () => {
         inputRange : document.getElementById('range'),
         phoneInternals : document.getElementById('internals'),
         flashWrapp : document.getElementById('flash-wrapp'),
-        rainWrapp : document.getElementById('rain-wrapp')
+        rainWrapp : document.getElementById('rain-wrapp'),
+        textArray : document.querySelectorAll('.text')
     };
 
     /**
@@ -42,23 +43,33 @@ window.onload = () => {
 
     // function that changes text
 
-    const textChange = (rangeValue) => {
-        let textArray = document.querySelectorAll(".text");
-        const toggleActiveText = (position) => {
-        for (let i = 0; i < textArray.length; i++) {
-            textArray[i].classList.remove('active');
+    class textChange {
+        constructor() {
+            this.textArray = Elements.textArray;
         }
-            textArray[position].classList.add('active');
-        };
+
+        toggleActiveText(position) {
+            console.log(this.textArray);
+            for (let i = 0; i < this.textArray.length; i++) {
+                this.textArray[i].classList.remove('active');
+                console.log(this.textArray);
+            }
+                this.textArray[position].classList.add('active');
+        }
+    }
+
+    var text = new textChange();
+
+    const toggleText = (rangeValue) => {
         if (rangeValue == 0 && rangeValue < 15) {
-            toggleActiveText(0);
-        } else if (rangeValue > 14 && rangeValue < 29) {
-            toggleActiveText(1);
-        } else if (rangeValue > 28 && rangeValue < 44) {
-            toggleActiveText(2);
-        } else if (rangeValue > 43) {
-            toggleActiveText(3);
-        }
+            text.toggleActiveText(0);
+                } else if (rangeValue > 14 && rangeValue < 29) {
+            text.toggleActiveText(1);
+                } else if (rangeValue > 28 && rangeValue < 44) {
+            text.toggleActiveText(2);
+                } else if (rangeValue > 43) {
+            text.toggleActiveText(3);
+                }
     };
 
     //function that hides and shows video
@@ -95,7 +106,7 @@ window.onload = () => {
         }
         createRains() {
 
-            for ( let i = 1; i < randomNumber( 80, 120 ); i++ ) {
+            for ( let i = 1; i < randomNumber( 40, 80 ); i++ ) {
                 let dropNumber = randomNumber(1, 4),
                     newClass = 'rain-drop' + dropNumber;
 
@@ -165,7 +176,7 @@ window.onload = () => {
 
     //function that close widget on click
 
-    function closeWidget() {
+    const closeWidget = () => {
         let closeWidgetIcon = document.getElementById('close-link'),
             widgetWrapper = document.getElementById('outer-container');
         closeWidgetIcon.addEventListener('click', function() {
@@ -173,7 +184,7 @@ window.onload = () => {
                 Elements.phoneVideoWrapper.classList.add('hidden');
                 Elements.phoneVideoWrapper.pause();
         }, false);
-    }
+    };
 
     //randomise numbers function
 
@@ -207,8 +218,8 @@ window.onload = () => {
 
     Elements.inputRange.addEventListener('input', function (e) {
         let rangeValue = e.target.value;
+        toggleText(rangeValue);
         changePhoneBackground(rangeValue);
-        textChange(rangeValue);
         hideVideo(rangeValue);
         showFlash(rangeValue);
         rainDropsShow(rangeValue);

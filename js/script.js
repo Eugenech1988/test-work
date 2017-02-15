@@ -15,7 +15,9 @@ window.onload = () => {
         phoneInternals : document.getElementById('internals'),
         flashWrapp : document.getElementById('flash-wrapp'),
         rainWrapp : document.getElementById('rain-wrapp'),
-        textArray : document.querySelectorAll('.text')
+        textArray : document.querySelectorAll('.text'),
+        closeWidgetIcon : document.getElementById('close-link'),
+        widgetWrapper : document.getElementById('outer-container')
     };
 
     /**
@@ -41,7 +43,7 @@ window.onload = () => {
         }
     };
 
-    // function that changes text
+    //text constructor
 
     class textChange {
         constructor() {
@@ -52,13 +54,12 @@ window.onload = () => {
             console.log(this.textArray);
             for (let i = 0; i < this.textArray.length; i++) {
                 this.textArray[i].classList.remove('active');
-                console.log(this.textArray);
             }
                 this.textArray[position].classList.add('active');
         }
     }
 
-    var text = new textChange();
+    // function that changes text
 
     const toggleText = (rangeValue) => {
         if (rangeValue == 0 && rangeValue < 15) {
@@ -159,7 +160,6 @@ window.onload = () => {
     }
 
 
-    let rains = new Rains();
 
     //function that shows rain raindrops
 
@@ -177,10 +177,8 @@ window.onload = () => {
     //function that close widget on click
 
     const closeWidget = () => {
-        let closeWidgetIcon = document.getElementById('close-link'),
-            widgetWrapper = document.getElementById('outer-container');
-        closeWidgetIcon.addEventListener('click', function() {
-            widgetWrapper.classList.add('hidden');
+        Elements.closeWidgetIcon.addEventListener('click', () => {
+            Elements.widgetWrapper.classList.add('hidden');
                 Elements.phoneVideoWrapper.classList.add('hidden');
                 Elements.phoneVideoWrapper.pause();
         }, false);
@@ -210,6 +208,11 @@ window.onload = () => {
             Elements.loaderWrapp.style.display = 'none';
         }, 2000)
     };
+
+    // class init
+
+    const text = new textChange();
+    const rains = new Rains();
 
     // initialize functions
 

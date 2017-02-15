@@ -17,7 +17,8 @@ window.onload = () => {
         rainWrapp : document.getElementById('rain-wrapp'),
         textArray : document.querySelectorAll('.text'),
         closeWidgetIcon : document.getElementById('close-link'),
-        widgetWrapper : document.getElementById('outer-container')
+        widgetWrapper : document.getElementById('outer-container'),
+        iFrameBody : document.getElementsByTagName('body')
     };
 
     /**
@@ -177,10 +178,14 @@ window.onload = () => {
     //function that close widget on click
 
     const closeWidget = () => {
-        Elements.closeWidgetIcon.addEventListener('click', () => {
+        Elements.closeWidgetIcon.addEventListener('click', (e) => {
+            e.preventDefault();
             Elements.widgetWrapper.classList.add('hidden');
-                Elements.phoneVideoWrapper.classList.add('hidden');
-                Elements.phoneVideoWrapper.pause();
+            Elements.phoneVideoWrapper.classList.add('hidden');
+            Elements.phoneVideoWrapper.pause();
+            setTimeout(() => {
+                Elements.widgetWrapper.style.display = 'none';
+            }, 500)
         }, false);
     };
 

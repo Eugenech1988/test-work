@@ -17,14 +17,13 @@ window.onload = () => {
         rainWrapp : document.getElementById('rain-wrapp'),
         textArray : document.querySelectorAll('.text'),
         closeWidgetIcon : document.getElementById('close-link'),
-        widgetWrapper : document.getElementById('outer-container'),
-        iFrameBody : document.getElementsByTagName('body')
+        widgetWrapper : document.getElementById('outer-container')
     };
 
     /**
      *
      * @param rangeValue - Input range value
-     * @
+     *
      */
 
     // function that changes phone's background and shows internals of phone
@@ -77,7 +76,7 @@ window.onload = () => {
     //function that hides and shows video
 
     const hideVideo = (rangeValue) => {
-        if (rangeValue > 1) {
+        if (rangeValue > 2) {
             Elements.phoneVideoWrapper.classList.add('hidden');
             Elements.phoneVideoWrapper.pause();
         } else {

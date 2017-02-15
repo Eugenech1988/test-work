@@ -163,7 +163,7 @@ window.onload = () => {
 
     //function that shows rain raindrops
 
-    function rainDropsShow(rangeValue) {
+    const rainDropsShow = (rangeValue) => {
 
         if (rangeValue > 10 && rangeValue < 29) {
             rains.renderRains();
@@ -172,7 +172,7 @@ window.onload = () => {
             Elements.rainWrapp.classList.remove('visible');
         }
 
-    }
+    };
 
     //function that close widget on click
 
@@ -223,7 +223,7 @@ window.onload = () => {
     closeWidget();
     preLoad();
 
-    Elements.inputRange.addEventListener('input', function (e) {
+    Elements.inputRange.addEventListener('input', (e) => {
         let rangeValue = e.target.value;
         toggleText(rangeValue);
         changePhoneBackground(rangeValue);

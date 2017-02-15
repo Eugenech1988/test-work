@@ -29,7 +29,7 @@ window.onload = () => {
                 let totalFrames = 59 , //set total frames
                     frameHeight = 100/totalFrames; //receive height percentage
 
-        Elements.phoneWrapper.style.backgroundPositionY = frameHeight*rangeValue + "%"; //get background position in percentage
+        Elements.phoneWrapper.style.backgroundPosition = "0" + "%" + " " + frameHeight*rangeValue + "%"; //get background position in percentage
 
         if (rangeValue == 59) {
             Elements.phoneWrapper.classList.add('invisible');
